@@ -4,6 +4,12 @@ require 'card'
 describe Card do
     subject(:card) {Card.new(1,'H')}
 
+    describe '::get_all_cards' do
+        it 'should return 52 cards' do
+            expect(Card.get_all_cards.length).to be(52)
+        end
+    end
+
     describe '#initialize' do 
         context 'when given valid arguments' do
             it 'should not raise an error' do 
@@ -12,7 +18,7 @@ describe Card do
         end
         context 'when given invalid arguments' do 
             it 'should raise an error' do 
-                expect {Card.new}.to raise_error
+                expect {Card.new}.to raise_error(ArgumentError)
                 expect {Card.new(14,'S')}.to raise_error(/Invalid Rank/)
                 expect {Card.new(8,'B')}.to raise_error(/Invalid Suit/)
             end
@@ -27,7 +33,7 @@ describe Card do
 
     describe '#suit' do
         it 'should return the suit' do
-            expect(card.suit).to be('H')
+            expect(card.suit).to eq('H')
         end
     end
 
